@@ -56,6 +56,8 @@ buildPythonPackage (finalAttrs: {
 
   postPatch = ''
     cp ${./Cargo.lock} Cargo.lock
+    substituteInPlace pyproject.toml \
+      --replace-fail '"pyo3/extension-module", "pyo3/generate-import-lib"' '"pyo3/extension-module"'
   '';
 
   meta = {
