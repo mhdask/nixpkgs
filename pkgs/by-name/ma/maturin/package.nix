@@ -9,10 +9,9 @@
   maturin,
   python3,
 }:
-
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "maturin";
-  version = "1.12.6";
+  version = "1.13.3";
 
   src = fetchFromGitHub {
     owner = "PyO3";
@@ -32,7 +31,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   passthru = {
     tests = {
-      version = testers.testVersion { package = maturin; };
+      version = testers.testVersion {package = maturin;};
       pyo3 = python3.pkgs.callPackage ./pyo3-test {
         pyproject = true;
         buildAndTestSubdir = "examples/word-count";
@@ -45,7 +44,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       };
     };
 
-    updateScript = nix-update-script { };
+    updateScript = nix-update-script {};
   };
 
   meta = {
