@@ -14,10 +14,10 @@ python3Packages.buildPythonPackage (finalAttrs: {
     hash = "sha256-1RFghluZsxPQXHSxYdzuwGaJMyu7T9tPY34dt97ze9Q=";
   };
 
-  build-system = [python3Packages.hatchling];
+  build-system = [ python3Packages.hatchling ];
   dependencies = with python3Packages; [
     neo4j
-    # neo4j-rust-ext
+    neo4j-rust-ext
     pydantic
     pydantic-settings
     pytest
@@ -26,7 +26,7 @@ python3Packages.buildPythonPackage (finalAttrs: {
     boto3
     email-validator
     redis
-    [hiredis]
+    [ hiredis ]
     typer
     click
     prefect
@@ -69,7 +69,7 @@ python3Packages.buildPythonPackage (finalAttrs: {
     netutils
     # ariadne-codegen
   ];
-  nativeBuildInputs = [python3Packages.pythonRelaxDepsHook];
+  nativeBuildInputs = [ python3Packages.pythonRelaxDepsHook ];
   pythonRelaxDeps = true;
   dontCheckRuntimeDeps = true;
   dontCheck = true;
