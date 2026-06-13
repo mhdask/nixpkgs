@@ -5,9 +5,7 @@
 # Examples are Python-based cli tools.
 #
 # For more details, please see the Python section in the Nixpkgs manual.
-
 self: super: with self; {
-
   bootstrap = lib.recurseIntoAttrs {
     flit-core = toPythonModule (callPackage ../development/python-modules/bootstrap/flit-core { });
     installer = toPythonModule (
@@ -11131,6 +11129,8 @@ self: super: with self; {
   neo = callPackage ../development/python-modules/neo { };
 
   neo4j = callPackage ../development/python-modules/neo4j { };
+
+  neo4j-rust-ext = callPackage ../development/python-modules/neo4j-rust-ext { };
 
   neoteroi-mkdocs = callPackage ../development/python-modules/neoteroi-mkdocs { };
 

@@ -42,7 +42,7 @@ python3Packages.buildPythonPackage (finalAttrs: {
     fastapi-storages
     graphene
     gunicorn
-    # lunr
+    lunr
     starlette-exporter
     python-multipart
     asgi-correlation-id
