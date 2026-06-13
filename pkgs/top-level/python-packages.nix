@@ -18952,6 +18952,8 @@ self: super: with self; {
 
   starlette-context = callPackage ../development/python-modules/starlette-context { };
 
+  starlette_exporter = callPackage ../development/python-modules/starlette_exporter { };
+
   starlette-wtf = callPackage ../development/python-modules/starlette-wtf { };
 
   starline = callPackage ../development/python-modules/starline { };
