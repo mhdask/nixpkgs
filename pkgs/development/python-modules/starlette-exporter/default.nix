@@ -7,7 +7,7 @@
   starlette,
 }:
 buildPythonPackage (finalAttrs: {
-  pname = "starlette_exporter";
+  pname = "starlette-exporter";
   version = "0.23.0";
   pyproject = true;
   src = fetchFromGitHub {
