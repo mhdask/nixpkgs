@@ -26,11 +26,11 @@ python3Packages.buildPythonPackage (finalAttrs: {
     boto3
     email-validator
     redis
-    [ hiredis ]
+    hiredis
     typer
     click
     prefect
-    # prefect-redis ARCHAIVED
+    prefect-redis
     ujson
     jinja2
     gitpython
@@ -39,26 +39,26 @@ python3Packages.buildPythonPackage (finalAttrs: {
     deepdiff
     # Dependencies specific to the API Server
     fastapi
-    # fastapi-storages
+    fastapi-storages
     graphene
     gunicorn
     # lunr
-    # starlette-exporter
+    starlette-exporter
     python-multipart
-    # asgi-correlation-id
+    asgi-correlation-id
     bcrypt
     pyjwt
     uvicorn
-    # opentelemetry-instrumentation-aio-pika
+    opentelemetry-instrumentation-aio-pika
     opentelemetry-instrumentation-fastapi
     opentelemetry-exporter-otlp-proto-grpc
     opentelemetry-exporter-otlp-proto-http
     nats-py
     netaddr
     authlib
-    # aiodataloader
-    # fast-depends
-    # cachetools-async
+    aiodataloader
+    fast-depends
+    cachetools-async
     puremagic
     # Dependencies specific to the SDK
     rich
@@ -67,10 +67,10 @@ python3Packages.buildPythonPackage (finalAttrs: {
     dulwich
     whenever
     netutils
-    # ariadne-codegen
+    ariadne-codegen
   ];
   nativeBuildInputs = [ python3Packages.pythonRelaxDepsHook ];
   pythonRelaxDeps = true;
-  dontCheckRuntimeDeps = true;
-  dontCheck = true;
+  # dontCheckRuntimeDeps = true;
+  # dontCheck = true;
 })
