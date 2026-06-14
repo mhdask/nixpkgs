@@ -71,6 +71,4 @@ python3Packages.buildPythonPackage (finalAttrs: {
   ];
   nativeBuildInputs = [ python3Packages.pythonRelaxDepsHook ];
   pythonRelaxDeps = true;
-  # dontCheckRuntimeDeps = true;
-  # dontCheck = true;
 })
