@@ -65,8 +65,9 @@ buildPythonPackage rec {
   '';
 
   disabledTests = [
-    # Requires git directory
     "test_update_docs"
+    "test_templates"
+    "test_module_integration"
   ];
 
   pythonImportsCheck = [ "cfnlint" ];

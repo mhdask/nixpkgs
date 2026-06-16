@@ -5,9 +5,7 @@
 # Examples are Python-based cli tools.
 #
 # For more details, please see the Python section in the Nixpkgs manual.
-
 self: super: with self; {
-
   bootstrap = lib.recurseIntoAttrs {
     flit-core = toPythonModule (callPackage ../development/python-modules/bootstrap/flit-core { });
     installer = toPythonModule (
@@ -263,6 +261,8 @@ self: super: with self; {
   aiocsv = callPackage ../development/python-modules/aiocsv { };
 
   aiocurrencylayer = callPackage ../development/python-modules/aiocurrencylayer { };
+
+  aiodataloader = callPackage ../development/python-modules/aiodataloader { };
 
   aiodhcpwatcher = callPackage ../development/python-modules/aiodhcpwatcher { };
 
@@ -998,6 +998,8 @@ self: super: with self; {
 
   ariadne = callPackage ../development/python-modules/ariadne { };
 
+  ariadne-codegen = callPackage ../development/python-modules/ariadne-codegen { };
+
   arpeggio = callPackage ../development/python-modules/arpeggio { };
 
   arpy = callPackage ../development/python-modules/arpy { };
@@ -1059,6 +1061,8 @@ self: super: with self; {
   ase = callPackage ../development/python-modules/ase { };
 
   asf-search = callPackage ../development/python-modules/asf-search { };
+
+  asgi-correlation-id = callPackage ../development/python-modules/asgi-correlation-id { };
 
   asgi-csrf = callPackage ../development/python-modules/asgi-csrf { };
 
@@ -2450,6 +2454,8 @@ self: super: with self; {
   cachelib = callPackage ../development/python-modules/cachelib { };
 
   cachetools = callPackage ../development/python-modules/cachetools { };
+
+  cachetools-async = callPackage ../development/python-modules/cachetools-async { };
 
   cachey = callPackage ../development/python-modules/cachey { };
 
@@ -5441,6 +5447,8 @@ self: super: with self; {
 
   fast-colorthief = callPackage ../development/python-modules/fast-colorthief { };
 
+  fast-depends = callPackage ../development/python-modules/fast-depends { };
+
   fast-histogram = callPackage ../development/python-modules/fast-histogram { };
 
   fast-query-parsers = callPackage ../development/python-modules/fast-query-parsers { };
@@ -5462,6 +5470,8 @@ self: super: with self; {
   fastapi-pagination = callPackage ../development/python-modules/fastapi-pagination { };
 
   fastapi-sso = callPackage ../development/python-modules/fastapi-sso { };
+
+  fastapi-storages = callPackage ../development/python-modules/fastapi-storages { };
 
   fastapi-versionizer = callPackage ../development/python-modules/fastapi-versionizer { };
 
@@ -7675,6 +7685,8 @@ self: super: with self; {
 
   inform = callPackage ../development/python-modules/inform { };
 
+  infrahub-sdk = callPackage ../development/python-modules/infrahub-sdk { };
+
   infrared-protocols = callPackage ../development/python-modules/infrared-protocols { };
 
   ingredient-parser-nlp = callPackage ../development/python-modules/ingredient-parser-nlp { };
@@ -9542,6 +9554,8 @@ self: super: with self; {
 
   lunatone-rest-api-client = callPackage ../development/python-modules/lunatone-rest-api-client { };
 
+  lunr = callPackage ../development/python-modules/lunr { };
+
   lupa = callPackage ../development/python-modules/lupa { };
 
   lupupy = callPackage ../development/python-modules/lupupy { };
@@ -11122,6 +11136,8 @@ self: super: with self; {
 
   neo4j = callPackage ../development/python-modules/neo4j { };
 
+  neo4j-rust-ext = callPackage ../development/python-modules/neo4j-rust-ext { };
+
   neoteroi-mkdocs = callPackage ../development/python-modules/neoteroi-mkdocs { };
 
   nessclient = callPackage ../development/python-modules/nessclient { };
@@ -11915,6 +11931,10 @@ self: super: with self; {
 
   opentelemetry-instrumentation =
     callPackage ../development/python-modules/opentelemetry-instrumentation
+      { };
+
+  opentelemetry-instrumentation-aio-pika =
+    callPackage ../development/python-modules/opentelemetry-instrumentation-aio-pika
       { };
 
   opentelemetry-instrumentation-aiohttp-client =
@@ -13104,6 +13124,8 @@ self: super: with self; {
   precisely = callPackage ../development/python-modules/precisely { };
 
   prefect = callPackage ../development/python-modules/prefect { };
+
+  prefect-redis = callPackage ../development/python-modules/prefect-redis { };
 
   prefixed = callPackage ../development/python-modules/prefixed { };
 
@@ -18969,6 +18991,8 @@ self: super: with self; {
   starlette-compress = callPackage ../development/python-modules/starlette-compress { };
 
   starlette-context = callPackage ../development/python-modules/starlette-context { };
+
+  starlette-exporter = callPackage ../development/python-modules/starlette-exporter { };
 
   starlette-wtf = callPackage ../development/python-modules/starlette-wtf { };
 
