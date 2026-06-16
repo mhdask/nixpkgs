@@ -1,6 +1,7 @@
 {
   lib,
   fetchFromGitHub,
+  makeWrapper,
   python3,
 }:
 let
@@ -24,18 +25,7 @@ let
   };
 
   py = python.pkgs;
-in
-py.buildPythonPackage (finalAttrs: {
-  pname = "infrahub-backend";
-  version = "1.1.10";
-  pyproject = true;
-  src = fetchFromGitHub {
-    owner = "opsmill";
-    repo = "infrahub";
-    rev = "release-1.10";
-    hash = "sha256-rXaBwZHaPnGb+0Evr8M6t9jxAr9CgOd3xhpKj3D2Asw=";
-  };
-  build-system = [ py.hatchling ];
+
   dependencies = with py; [
     neo4j
     neo4j-rust-ext
@@ -72,6 +62,7 @@ py.buildPythonPackage (finalAttrs: {
     uvicorn
     opentelemetry-instrumentation-aio-pika
     opentelemetry-instrumentation-fastapi
+    grpcio
     opentelemetry-exporter-otlp-proto-grpc
     opentelemetry-exporter-otlp-proto-http
     nats-py
@@ -91,7 +82,34 @@ py.buildPythonPackage (finalAttrs: {
     ariadne-codegen
     infrahub-sdk
   ];
-  nativeBuildInputs = [ py.pythonRelaxDepsHook ];
+in
+py.buildPythonPackage {
+  pname = "infrahub-backend";
+  version = "1.1.10";
+  pyproject = true;
+  src = fetchFromGitHub {
+    owner = "opsmill";
+    repo = "infrahub";
+    rev = "release-1.10";
+    hash = "sha256-rXaBwZHaPnGb+0Evr8M6t9jxAr9CgOd3xhpKj3D2Asw=";
+  };
+  build-system = [ py.hatchling ];
+  inherit dependencies;
+  nativeBuildInputs = [
+    makeWrapper
+    py.pythonRelaxDepsHook
+  ];
   pythonRelaxDeps = true;
   doCheck = false;
-})
+
+  postInstall = ''
+    pythonPath="${py.makePythonPath dependencies}:$out/${py.python.sitePackages}"
+    makeWrapper ${lib.getExe py.gunicorn} $out/bin/gunicorn \
+      --prefix PYTHONPATH : "$pythonPath"
+    makeWrapper ${lib.getExe py.prefect} $out/bin/prefect \
+      --prefix PYTHONPATH : "$pythonPath"
+    makeWrapper ${lib.getExe py.uvicorn} $out/bin/infrahub-prefect-server \
+      --prefix PYTHONPATH : "$pythonPath" \
+      --add-flags "infrahub.prefect_server.app:create_infrahub_prefect --factory"
+  '';
+}
