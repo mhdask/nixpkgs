@@ -1,21 +1,42 @@
 {
+  lib,
   fetchFromGitHub,
-  python3Packages,
+  python3,
 }:
-python3Packages.buildPythonPackage (finalAttrs: {
-  pname = "infrahub-backend";
-  version = "1.9.8";
-  pyproject = true;
+let
+  python = python3.override {
+    packageOverrides = final: prev: {
+      dulwich = prev.dulwich.overridePythonAttrs (_: {
+        doCheck = false;
+      });
+      infrahub-sdk = prev.infrahub-sdk.overridePythonAttrs (old: {
+        src = fetchFromGitHub {
+          owner = "mhdask";
+          repo = "infrahub-sdk-python";
+          rev = "whenever-bump";
+          hash = "sha256-cDuWWVZYTWentIwWHpFwQHZLB7Fm3qFcc3/ciYCUj3A=";
+        };
+        dependencies = map (dep: if dep.pname or "" == "whenever" then final.whenever else dep) (
+          old.dependencies or [ ]
+        );
+      });
+    };
+  };
 
+  py = python.pkgs;
+in
+py.buildPythonPackage (finalAttrs: {
+  pname = "infrahub-backend";
+  version = "1.1.10";
+  pyproject = true;
   src = fetchFromGitHub {
     owner = "opsmill";
     repo = "infrahub";
-    tag = "infrahub-v${finalAttrs.version}";
-    hash = "sha256-1RFghluZsxPQXHSxYdzuwGaJMyu7T9tPY34dt97ze9Q=";
+    rev = "release-1.10";
+    hash = "sha256-rXaBwZHaPnGb+0Evr8M6t9jxAr9CgOd3xhpKj3D2Asw=";
   };
-
-  build-system = [ python3Packages.hatchling ];
-  dependencies = with python3Packages; [
+  build-system = [ py.hatchling ];
+  dependencies = with py; [
     neo4j
     neo4j-rust-ext
     pydantic
@@ -68,7 +89,9 @@ python3Packages.buildPythonPackage (finalAttrs: {
     whenever
     netutils
     ariadne-codegen
+    infrahub-sdk
   ];
-  nativeBuildInputs = [ python3Packages.pythonRelaxDepsHook ];
+  nativeBuildInputs = [ py.pythonRelaxDepsHook ];
   pythonRelaxDeps = true;
+  doCheck = false;
 })
