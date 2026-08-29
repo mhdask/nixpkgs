@@ -14,7 +14,18 @@ in
 
     package = lib.mkPackageOption pkgs "infrahub" { };
 
-    frontend.package = lib.mkPackageOption pkgs "infrahub-frontend" { };
+    frontend.package = lib.mkOption {
+      type = types.package;
+      default = cfg.package.frontend;
+      defaultText = lib.literalExpression "config.services.infrahub.package.frontend";
+      description = ''
+        Package providing the pre-built Infrahub frontend static assets
+        (a `dist` directory containing `index.html`, `assets`, and
+        `favicons`). Defaults to the frontend build exposed via the main
+        package's `passthru.frontend`, since the two must be built from the
+        same source revision to stay in sync.
+      '';
+    };
 
     host = lib.mkOption {
       type = types.str;
